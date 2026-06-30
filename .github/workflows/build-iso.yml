@@ -1,0 +1,48 @@
+name: Build ISO
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "iso/**"
+      - "omni/**"
+      - ".github/workflows/build-iso.yml"
+  workflow_dispatch:
+  release:
+    types: [created]
+
+jobs:
+  build-iso:
+    name: Build bootable OmniOS AI ISO
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android || true
+          df -h
+
+      - name: Build OmniOS AI ISO
+        run: |
+          chmod +x iso/build-iso.sh
+          sudo --preserve-env=OMNI_DIST iso/build-iso.sh
+        env:
+          OMNI_DIST: bookworm
+
+      - name: Show ISO details
+        run: ls -lh dist/*.iso
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: omnios-ai-iso
+          path: dist/*.iso
+          if-no-files-found: error
+
+      - name: Attach ISO to release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.iso
