@@ -1,0 +1,6 @@
+# Core has zero hard dependencies (stdlib only) so the scaffold runs anywhere.
+# Optional model backends:
+#   pip install llama-cpp-python   # for the llama.cpp / GGUF backend
+#   pip install transformers torch # for the Transformers backend
+# Optional dev tooling:
+#   pip install pytest

@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "Firefox",
+      "platform": "linux",
+      "command": "flatpak run org.mozilla.firefox"
+    },
+    {
+      "name": "Photoshop",
+      "platform": "windows",
+      "command": "wine ~/.omni/windows/photoshop/Photoshop.exe"
+    },
+    {
+      "name": "Instagram",
+      "platform": "android",
+      "command": "waydroid app launch com.instagram.android"
+    }
+  ]
+}

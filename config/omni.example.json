@@ -1,0 +1,15 @@
+{
+  "active_model": "mistral-7b-instruct",
+  "permission_level": 2,
+  "models": {
+    "mistral-7b-instruct": {
+      "backend": "llama.cpp",
+      "model_path": "/models/mistral-7b-instruct.Q4_K_M.gguf",
+      "context_length": 8192,
+      "gpu_layers": 32
+    },
+    "echo": {
+      "backend": "echo"
+    }
+  }
+}

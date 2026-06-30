@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omnios-ai"
+version = "0.1.0"
+description = "OmniOS AI — hybrid Linux OS platform with a unified app runtime and a local AI control agent"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "OmniOS AI contributors" }]
+keywords = ["os", "ai-agent", "wine", "waydroid", "flatpak", "llm"]
+
+dependencies = []
+
+[project.optional-dependencies]
+llama = ["llama-cpp-python>=0.2.0"]
+transformers = ["transformers>=4.40", "torch>=2.0"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+omni = "omni.cli:main"
+omnid = "omni.daemon.server:main"
+
+[tool.setuptools.packages.find]
+include = ["omni*"]
