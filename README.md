@@ -2,6 +2,8 @@
 
 > A hybrid, Linux-based OS platform that runs **Linux**, **Windows**, and **Android** apps side by side, controlled by an on-device **AI agent** powered by local Hugging Face models.
 
+![OmniOS AI desktop preview](docs/preview.svg)
+
 This repository is the reference implementation / scaffold for the OmniOS AI concept. It does **not** build a kernel from scratch. Instead it layers a unified app runtime, an AI control plane, and a local OS-control daemon on top of an existing Linux base.
 
 ## Why
@@ -71,6 +73,15 @@ omni agent chat "Open Firefox and set brightness to 40%"
 # Run the local control daemon (omnid)
 omni daemon --host 127.0.0.1 --port 8765
 ```
+
+## Bootable ISO
+
+A bootable **live ISO** is built by GitHub Actions using Debian live-build. It boots into a Wayland (sway) desktop with the OmniOS app runtimes (Flatpak, Wine, QEMU/KVM) and the `omni` CLI preinstalled.
+
+- **Through GitHub:** the [Build ISO workflow](.github/workflows/build-iso.yml) runs on pushes to `main` that touch `iso/` or `omni/`, on manual dispatch (**Actions → Build ISO → Run workflow**), and on each published release. The image is uploaded as the `omnios-ai-iso` artifact.
+- **Locally:** `sudo iso/build-iso.sh` → `dist/omnios-ai-bookworm-amd64.iso`
+
+See [iso/README.md](iso/README.md) for details and how to boot the ISO in QEMU.
 
 ## What is realistic vs. not
 
